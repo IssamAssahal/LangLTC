@@ -5,11 +5,13 @@ import com.langltc.pl.repositories.StudentRepository;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Issam As-sahal ISA On 10/5/2018
@@ -17,22 +19,28 @@ import java.util.List;
  **/
 @Log
 @RestController
-@RequestMapping(path = "/Student")
+@RequestMapping(path = "/")
 public class StudentController {
 
-    @Autowired
+    final
     StudentRepository studentRepository;
 
+    @Autowired
+    public StudentController(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
-    @GetMapping(path = "/getStudent"/*, produces = "application/json"*/)
+
+    @GetMapping(path = "/students"/*, produces = "application/json"*/)
     public List<Student> getStudent() {
         log.info("List all the student");
          return studentRepository.findAll();
     }
 
-    @GetMapping(path = "/getstring")
-    public String getString() {
-        return "issamIsamamamam";
+    @GetMapping(path = "/students/{id}")
+    public Optional<Student> getStudentById(@PathVariable Long id) {
+        log.info("List all the student");
+        return studentRepository.findById(id);
     }
 
 
