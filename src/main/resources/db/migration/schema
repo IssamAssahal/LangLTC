@@ -1,0 +1,110 @@
+CREATE TABLE "Teachers" (
+  "Teacher_ID" serial,
+  "First_name" VARCHAR (50),
+  "Last_name" VARCHAR (50),
+  "Middle_name" VARCHAR (50),
+  "Age" integer,
+  "Address" VARCHAR (200),
+  "Phone_number" VARCHAR (20),
+  "Email" VARCHAR (254),
+  "Base_salary" real,
+  "Working_hours" real,
+  "Bonus" real,
+  "Hired_date" date,
+  "Level" VARCHAR (50),
+  PRIMARY KEY ("Teacher_ID")
+);
+
+CREATE TABLE "TestPapers" (
+  "Test_Paper_ID" serial,
+  "Name" VARCHAR (50),
+  "Duration" real,
+  "Teacher_ID" integer,
+  "Couse_ID" integer,
+  PRIMARY KEY ("Test_Paper_ID")
+);
+
+CREATE INDEX "FK" ON  "TestPapers" ("Teacher_ID", "Couse_ID");
+
+CREATE TABLE "TestWriteByStudent" (
+  "Test_Paper_ID" integer,
+  "Students_ID" integer,
+  "Test_Score" real,
+  "Test_date" date
+);
+
+CREATE INDEX "FK" ON  "TestWriteByStudent" ("Test_Paper_ID", "Students_ID");
+
+CREATE TABLE "Employees" (
+  "Employees_ID" serial,
+  "Department" VARCHAR (50),
+  "First_name" VARCHAR (50),
+  "Last_name" VARCHAR (50),
+  "Middle_name" VARCHAR (50),
+  "Age" integer,
+  "Address" VARCHAR (200),
+  "Phone_number" VARCHAR (20),
+  "Email" VARCHAR (254),
+  "Base_salary" real,
+  "Working_hours" real,
+  "Bonus" real,
+  "Hired_date" date,
+  PRIMARY KEY ("Employees_ID")
+);
+
+CREATE TABLE "Courses" (
+  "Course_ID" serial,
+  "ClassRoom_ID" serial,
+  "Name" VARCHAR (50),
+  "Hours_Number" real,
+  "Price" real,
+  "Start_Date" date,
+  "Finish_Date" date,
+  PRIMARY KEY ("Course_ID")
+);
+
+CREATE INDEX "FK" ON  "Courses" ("ClassRoom_ID");
+
+CREATE TABLE "ClassRoom" (
+  "ClassRoom_ID" serial,
+  "Section_ID" serial,
+  "Name" VARCHAR (50),
+  "Capacity" integer,
+  PRIMARY KEY ("ClassRoom_ID")
+);
+
+CREATE INDEX "FK" ON  "ClassRoom" ("Section_ID");
+
+CREATE TABLE "Section" (
+  "Section_ID" serial,
+  "Name" VARCHAR (50),
+  "Class_Number" integer,
+  PRIMARY KEY ("Section_ID")
+);
+
+CREATE TABLE "Admin" (
+  "Admin_ID"  VARCHAR (50) ,
+  "Name"  VARCHAR (50) ,
+  "Password" VARCHAR (50),
+  PRIMARY KEY ("Admin_ID")
+);
+
+CREATE TABLE "Students" (
+  "Students_ID" serial,
+  "Course_ID" integer,
+  "Teacher_ID" integer,
+  "First_name" VARCHAR (50),
+  "Last_name" VARCHAR (50),
+  "Middle_name" VARCHAR (50),
+  "Age" integer,
+  "Address" VARCHAR (200),
+  "Phone_number" VARCHAR (20),
+  "Email" VARCHAR (254),
+  "Level" VARCHAR (50),
+  "Register_Date" date,
+  "Finish_Date" date,
+  PRIMARY KEY ("Students_ID")
+);
+
+CREATE INDEX "FK" ON  "Students" ("Course_ID", "Teacher_ID");
+
