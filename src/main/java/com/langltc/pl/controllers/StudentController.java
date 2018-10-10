@@ -22,8 +22,7 @@ import java.util.Optional;
 @RequestMapping(path = "/")
 public class StudentController {
 
-    final
-    StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
 
     @Autowired
     public StudentController(StudentRepository studentRepository) {
@@ -37,10 +36,24 @@ public class StudentController {
          return studentRepository.findAll();
     }
 
-    @GetMapping(path = "/students/{id}")
+
+
+    @GetMapping(path = "/students/id/{id}")
     public Optional<Student> getStudentById(@PathVariable Long id) {
-        log.info("List all the student");
+        log.info("Search for student by id");
         return studentRepository.findById(id);
+    }
+
+    @GetMapping(path = "/students/name/{name}")
+    public Optional<Student> getStudentByName(@PathVariable String name) {
+        log.info("Search for student by name");
+        return studentRepository.findByFirstNameIgnoreCase(name);
+    }
+
+    @GetMapping(path = "/students/count")
+    public long getStudentCount() {
+        log.info("Count all the students");
+        return studentRepository.count();
     }
 
 
