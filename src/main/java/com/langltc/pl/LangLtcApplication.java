@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.Date;
 
 @SpringBootApplication
@@ -18,7 +19,7 @@ public class LangLtcApplication {
 
         //Object Employee build by Lombok Builder Annotatoion
 //        Employee employee=new Employee.EmployeeBuilder().department("kjkj").build();
-        Employee employee =Employee.builder()
+        Employee employee = Employee.builder()
                 .employeeId(10)
                 .department("gfgfg")
                 .firstName("gfgfg")
@@ -52,7 +53,7 @@ public class LangLtcApplication {
                 .build();*/
 
 
-        Student  student= Student.builder()
+        Student student = Student.builder()
                 .studentId(10)
                 .firstName("gfgfg")
                 .middleName("gfgfg")
@@ -61,8 +62,8 @@ public class LangLtcApplication {
                 .address("gfgfg")
                 .phoneNumber("gfgfg")
                 .email("gfgfg")
-                .registerDate(DateUtils.asDate(LocalDate.now()))
-                .finishDate(new Date())
+                .registerDate(LocalDate.now())
+                .finishDate(LocalDate.of(2019, Month.JANUARY, 1))
                 .build();
         System.out.println(student.toString());
         student.getEnrolled(student.getFinishDate());

@@ -6,7 +6,10 @@ import lombok.extern.java.Log;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDate;
 import java.util.Date;
@@ -28,18 +31,24 @@ import java.util.List;
 //@Table (name= "student", schema = "langltc")
 public class Student extends SchoolMember {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long studentId;
+
+    //simple validation
+    @NotNull(message = "Student level is required")
     private String level;
     //    private float testScore;
-    private Date registerDate;
-    private Date finishDate;
+    @NotNull(message = "Student register date is required")
+    private LocalDate registerDate;
+    @NotNull(message = "Student finish date is required")
+    private LocalDate finishDate;
 
     public Student() {
 
     }
 
     @Builder
-    public Student(long studentId, String firstName, String middleName, String lastName, int age, String address, String phoneNumber, String email,  String level, Date registerDate, Date finishDate) {
+    public Student(long studentId, String firstName, String middleName, String lastName, int age, String address, String phoneNumber, String email, String level, LocalDate registerDate, LocalDate finishDate) {
         super(firstName, middleName, lastName, age, address, phoneNumber, email);
         this.studentId = studentId;
         this.level = level;
@@ -48,26 +57,22 @@ public class Student extends SchoolMember {
     }
 
 
-
-
-
-
     public void fillAdmissionForm() {
     }
 
-    public void getEnrolled( Date finishDate) {
+    public void getEnrolled(LocalDate finishDate) {
         LocalDate today = LocalDate.now();
-        if (finishDate.after(DateUtils.asDate(today))) {
+        if (finishDate.isBefore(today)) {
             log.info("Not Enrolled he finished his course");
-        }else {
-            log.info(" Still Enrolled he/she does not finish his course yet");
+        } else {
+            log.info(" Still Enrolled he/she does not finish his/her course yet");
         }
     }
 
     public void writeExam() {
     }
 
-    public double totalScore(List<TestPaper> score ,double count) {
-        return  count;
+    public double totalScore(List<TestPaper> score, double count) {
+        return count;
     }
 }
