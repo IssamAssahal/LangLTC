@@ -3,6 +3,7 @@ package com.langltc.pl.repositories;
 import com.langltc.pl.models.Student;
 import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -14,7 +15,7 @@ import java.util.Optional;
  * 1:52 PM
  **/
 
-
+@Repository
 public interface StudentRepository extends JpaRepository<Student,Long> {
 
     Optional <Student> findByFirstNameIgnoreCase(String name);

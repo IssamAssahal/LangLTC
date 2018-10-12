@@ -66,6 +66,7 @@ public class StudentController {
         LocalDate date = LocalDate.parse(dateVariable, formatter);
         log.info("Register Date after conversion from String to LocalDate " + date);
         return studentRepository.findByRegisterDate(date);
+
     }
 
     @GetMapping(path = "/count")
@@ -88,6 +89,12 @@ public class StudentController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    public void writeExam() {
+        String a = null;
+        if (a != null) {
+            
+        }
+    }
 
 }
 

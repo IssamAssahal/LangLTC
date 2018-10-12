@@ -66,6 +66,6 @@ public class LangLtcApplication {
                 .finishDate(LocalDate.of(2019, Month.JANUARY, 1))
                 .build();
         System.out.println(student.toString());
-        student.getEnrolled(student.getFinishDate());
+        student.stillEnrolled(student.getFinishDate());
     }
 }

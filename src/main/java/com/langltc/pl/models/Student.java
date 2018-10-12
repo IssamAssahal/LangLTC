@@ -31,8 +31,12 @@ import java.util.List;
 //@Table (name= "student", schema = "langltc")
 public class Student extends SchoolMember {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long studentId;
+
+    private long teacherId;
+
+    private  long courseId;
 
     //simple validation
     @NotNull(message = "Student level is required")
@@ -60,12 +64,14 @@ public class Student extends SchoolMember {
     public void fillAdmissionForm() {
     }
 
-    public void getEnrolled(LocalDate finishDate) {
+    public boolean stillEnrolled(LocalDate finishDate) {
         LocalDate today = LocalDate.now();
         if (finishDate.isBefore(today)) {
             log.info("Not Enrolled he finished his course");
+            return false;
         } else {
             log.info(" Still Enrolled he/she does not finish his/her course yet");
+            return true;
         }
     }
 
