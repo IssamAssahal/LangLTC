@@ -12,7 +12,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public final String[] PUBLIC_ENDPOINTS={
-            "api/v1/students"
+            "/api/v1/admin",
+            "/api/v1/students"
     };
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -22,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                      .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
-                     .antMatchers("api/v1/students").permitAll()
+                     .antMatchers(PUBLIC_ENDPOINTS).permitAll()
                      .anyRequest().authenticated()
             .and()
             .httpBasic();

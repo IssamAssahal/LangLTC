@@ -29,7 +29,7 @@ import java.util.Collection;
 public class Admin implements UserDetails {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private String adminId;
+    private long adminId;
     @NotNull
     private String name;
     @NotNull
