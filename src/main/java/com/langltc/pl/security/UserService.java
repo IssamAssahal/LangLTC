@@ -28,26 +28,29 @@ public class UserService implements UserDetailsService {
     private PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//       username=  findAllAdmin().getUsername();
-//        password=findAllAdmin().getPassword();
-        log.info("username"+username);
-//       log.info("password"+password);
+   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+////       username=  findAllAdmin().getUsername();
+//        String password=findAllAdmin().getPassword();
+//        log.info("username "+username);
+//        log.info("Password "+password);
+////       log.info("password"+password);
 //        return new User("issam12", passwordEncoder().encode("123456"), AuthorityUtils.NO_AUTHORITIES);
-       return new User("issam", passwordEncoder().encode("password"), AuthorityUtils.NO_AUTHORITIES);
-    }
+//       //return new User(username, password, AuthorityUtils.NO_AUTHORITIES);
+        return  null;
+   }
 
-    public void saveAdmin(Admin admin) {
+    public Admin saveAdmin(Admin admin) {
         admin.setPassword(passwordEncoder().encode(admin.getPassword()));
-        adminRepository.save(admin);
+       return adminRepository.save(admin);
     }
 
 
-  //  public List<Admin> findAllAdmin(){
-  public Admin findAllAdmin(){
 
-        return (Admin) adminRepository.findAll();
+  public List<Admin> findAllAdmin(){
+
+        return  adminRepository.findAll();
     }
+
+
 }

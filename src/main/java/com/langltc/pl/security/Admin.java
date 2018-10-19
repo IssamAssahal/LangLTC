@@ -35,7 +35,7 @@ public class Admin implements UserDetails {
     @NotNull
     private String username;
     @NotNull
-    @JsonIgnore
+//    @JsonIgnore
     private String password;
     @NotNull
     private LocalDate created;
